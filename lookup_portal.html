@@ -1,0 +1,209 @@
+<?php
+// define variables and set to empty values
+$nameErr = $emailErr = $genderErr = $websiteErr = "";
+$name = $email = $gender = $comment = $website = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (empty($_POST["name"])) {
+    $nameErr = "Name is required";
+  } else {
+    $name = test_input($_POST["name"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+      $nameErr = "Only letters and white space allowed";
+    }
+  }
+  
+  if (empty($_POST["email"])) {
+    $emailErr = "Email is required";
+  } else {
+    $email = test_input($_POST["email"]);
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "Invalid email format";
+    }
+  }
+    
+  if (empty($_POST["website"])) {
+    $website = "";
+  } else {
+    $website = test_input($_POST["website"]);
+    // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+      $websiteErr = "Invalid URL";
+    }
+  }
+
+  if (empty($_POST["comment"])) {
+    $comment = "";
+  } else {
+    $comment = test_input($_POST["comment"]);
+  }
+
+  if (empty($_POST["gender"])) {
+    $genderErr = "Gender is required";
+  } else {
+    $gender = test_input($_POST["gender"]);
+  }
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="http://s.mlcdn.co/animate.css">
+  	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  	<script src="https://use.fontawesome.com/729fc58e0b.js"></script>
+  	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  	<style type="text/css">
+  		.row-centered {
+    		text-align:center;
+		}
+		.col-centered {
+    		display:inline-block;
+    		float:none;
+    		text-align:left;
+    		margin-right:10px;
+		}
+		.aside{float: left; margin-top: 6px;}
+		.aside2{float: right;}
+		.panel-warning{background-color: #4885ed; border-color: transparent;border-radius: 10px;}
+		.panel-primary{background-color: #4885ed; border-color: transparent;}
+  	</style>
+  	<script>
+		  $( function() {
+		    $( "#slider-range" ).slider({
+		      range: true,
+		      min: 0,
+		      max: 500,
+		      values: [ 75, 300 ],
+		      slide: function( event, ui ) {
+		        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+		      }
+		    });
+		    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+		      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+		  } );
+  ``</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row row-centered" style="margin-top:10px;">
+			<div class="col-md-12 col-lg-12 col-centered">
+				<div class="panel panel-warning">
+				  <div class="panel-body">
+				  	<div class="aside">
+				  		<strong>Mumbai-Trivandum ,12/06/2016</strong>
+				  	</div>
+				  	<div class="aside2">
+				  		<button type="button" class="btn btn-primary btn-md"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Preference</button>
+				  	</div>
+				  </div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 col-lg-3">
+			    <div class="panel-group" id="accordion">
+			    <div class="panel panel-primary">
+			      <div class="panel-heading"><strong>Filter Trains</strong></div>
+			      <div class="panel-heading">
+			        <h4 class="panel-title">
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Price Range</a>
+			        </h4>
+			      </div>
+			      <div id="collapse1" class="panel-collapse collapse in">
+			        <div class="panel-body">
+			        	<div class="row">
+						     <div class="col-md-12 col-lg-12">
+						      	<p>
+									<label for="amount">Price range:</label>
+									<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;background-color:#4885ed">
+								</p>
+								<div id="slider-range"></div>
+						      </div>
+						 </div>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel panel-primary">
+			      <div class="panel-heading">
+			        <h4 class="panel-title">
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Fare Class</a>
+			        </h4>
+			      </div>
+			      <div id="collapse2" class="panel-collapse collapse">
+			        <div class="panel-body">
+			        	<form>
+						    <div class="form-group">
+						      <select class="form-control" id="sel1">
+						        <option><strong>All Classes</strong></option>
+						        <option>1A - AC First Class</option>
+						        <option>2A - AC Second Class</option>
+						        <option>3A - AC Three Tier</option>
+						        <option>3A - AC Three Tier</option>
+						        <option>3A - AC Three Tier</option>
+						        <option>3A - AC Three Tier</option>
+						        <option>3A - AC Three Tier</option>
+						        <option>GN - General</option>
+						      </select>
+						    </div>
+						</form>
+			        </div>
+			      </div>
+			    </div>
+			  </div> 
+			</div>
+			<div class="col-md-9">
+				<table class = "table table-striped">  
+				   <tbody>
+				      <tr>
+				         <td>
+				         	<div class="row">
+				         		<div class="col-md-12">
+				         			<p>kjdkjbkjbkdj</p>
+				         		</div>
+				         	</div>
+				         	<div class="row">
+				         		<div class="col-md-12">
+				         			<p>kjdkjbkjbkdj</p>
+				         		</div>
+				         	</div>
+				         </td>
+				         <td>Mumbai</td>
+				         <td>400003</td>
+				      </tr>
+				      
+				      <tr>
+				         <td>Sachin</td>
+				         <td>Mumbai</td>
+				         <td>400003</td>
+				      </tr>
+				      
+				      <tr>
+				         <td>Uma</td>
+				         <td>Pune</td>
+				         <td>411027</td>
+				      </tr>
+				   </tbody>
+				   
+				</table>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

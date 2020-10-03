@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<title>WebExpress|A Railway Reservation Website</title>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  	<link href="https://fonts.googleapis.com/css?family=Baloo+Chettan" rel="stylesheet">
+  	<link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand" rel="stylesheet">
+  	<script src="https://use.fontawesome.com/729fc58e0b.js"></script>
+  	<style type="text/css">
+  		.picArea {min-height:100vh; background-image: url("images/pic.jpg"); background-repeat: no-repeat;background-size: 100%,80%}
+  		.vidArea {min-height:100vh; background-image: url("images/pic.jpg"); background-repeat: no-repeat;background-size: 100%,80%}
+  		.audArea {min-height:100vh; background-image: url("images/pic.jpg"); background-repeat: no-repeat;background-size: 100%,80%}
+  		.hide-bullets {
+		    list-style:none;
+		    margin-left: -40px;
+		    margin-top:20px;
+		}
+
+		.thumbnail {
+		    padding: 0;
+		}
+
+		.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+		    width: 100%;
+		}
+		.navbar {margin-top: 10px; background-color: transparent;border-color: transparent;font-family: 'Baloo Chettan', cursive; font-size: 16px;}
+  		.navbar-inverse .navbar-nav > .active > a {background-color: transparent;color: #f89d0e;border-bottom: 1px solid yellow; border-top: 1px solid yellow; border-radius: 6px}
+  		.navbar-inverse .navbar-nav > .active > a:hover,
+		.navbar-inverse .navbar-nav > .active > a:focus {
+  			color: #f89d0e;
+  			background-color: transparent;
+  			border-bottom: 1px solid yellow; 
+  			border-top: 1px solid yellow; 
+  			border-radius: 6px;
+		}
+		.navbar-inverse .navbar-nav > li > a {
+  			color: #f89d0e;
+		}
+		.navbar-inverse .navbar-nav > li > a:hover,
+		.navbar-inverse .navbar-nav > li > a:focus {
+  			color: #f89d0e;
+  			background-color: transparent;
+  			border-bottom: 1px solid yellow; 
+  			border-top: 1px solid yellow; 
+  			border-radius: 6px;
+  			
+		}
+		.navbar-inverse .navbar-brand {
+			color:#1BAEE4;
+			font-family: 'Quicksand', sans-serif;
+  			font-size: 20px;
+  			font-style: bold;
+		}
+		 video {
+		    width: 100%;
+		    height: 80vh;
+		    margin-top: 80px;
+		}
+		.row-centered {
+			margin-top: 50vh;
+    		text-align:center;
+		}
+		.col-centered {
+    		display:inline-block;
+    		float:none;
+    		text-align:center;
+    		margin-right:10px;
+		}
+		#dalla{
+			margin-left: -230px;
+		}
+		#second{
+			margin-left: 160px;
+		}
+		#third{
+			margin-top: 40px;
+			margin-left: 25px;
+		}
+  	</style>
+  	<script type="text/javascript">
+  		  jQuery(document).ready(function($) {
+ 
+        $('#myCarousel').carousel({
+                interval: 5000
+        });
+ 
+        //Handles the carousel thumbnails
+        $('[id^=carousel-selector-]').click(function () {
+        var id_selector = $(this).attr("id");
+        try {
+            var id = /-(\d+)$/.exec(id_selector)[1];
+            console.log(id_selector, id);
+            jQuery('#myCarousel').carousel(parseInt(id));
+        } catch (e) {
+            console.log('Regex failed!', e);
+        }
+    });
+        // When the carousel slides, auto update the text
+        $('#myCarousel').on('slid.bs.carousel', function (e) {
+                 var id = $('.item.active').data('slide-number');
+                $('#carousel-text').html($('#slide-content-'+id).html());
+        });
+});
+  	</script>
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+	<div class="container-fluid picArea" id="pic">
+		<nav class="navbar navbar-inverse navbar-fixed-top" id="myScrollspy">
+  			<div class="container-fluid">
+    			<div class="navbar-header">
+      				<a class="navbar-brand" href="index3.html" style="color:#f89d0e;"><strong>WebExpress</strong></a>
+    			</div>
+    			<ul class="nav navbar-nav">
+      				<li class="active" id="my"><a href="#pic"><i class="fa fa-picture-o" aria-hidden="true"></i> Pictures</a></li>
+      				<li><a href="#vid"><i class="fa fa-play" aria-hidden="true"></i> Videos</a></li>
+      				<li><a href="#aud"><i class="fa fa-music" aria-hidden="true"></i> Audio</a></li>
+    			</ul>
+    			<!-- <ul class="nav navbar-nav navbar-right">
+      				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      				<li><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    			</ul> -->
+  			</div>
+		</nav>
+		<div class="container" style="margin-top:60px;">
+    <div id="main_area">
+        <!-- Slider -->
+        <div class="row">
+            <div class="col-sm-6" id="slider-thumbs">
+                <!-- Bottom switcher of slider -->
+                <ul class="hide-bullets">
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-0">
+                            <img src="IMG/IMG0.jpg" style="width:83px;height:81px;">
+                        </a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-1"><img src="IMG/IMG1.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-2"><img src="IMG/IMG2.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-3"><img src="IMG/IMG3.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-4"><img src="IMG/IMG4.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-5"><img src="IMG/IMG5.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-6"><img src="IMG/IMG6.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-7"><img src="IMG/IMG7.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-8"><img src="IMG/IMG8.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-9"><img src="IMG/IMG9.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-10"><img src="IMG/IMG10.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-11"><img src="IMG/IMG11.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-12"><img src="IMG/IMG12.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-13"><img src="IMG/IMG13.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-14"><img src="IMG/IMG14.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+
+                    <li class="col-sm-3">
+                        <a class="thumbnail" id="carousel-selector-15"><img src="IMG/IMG15.jpg" style="width:83px;height:81px;"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-xs-12" id="slider">
+                    <!-- Top part of the slider -->
+                    <div class="row">
+                        <div class="col-sm-12" id="carousel-bounding-box">
+                            <div class="carousel slide" id="myCarousel">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="active item" data-slide-number="0">
+                                        <img src="IMG/IMG0.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="1">
+                                        <img src="IMG/IMG1.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="2">
+                                        <img src="IMG/IMG2.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="3">
+                                        <img src="IMG/IMG3.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="4">
+                                        <img src="IMG/IMG4.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="5">
+                                        <img src="IMG/IMG5.jpg" style="width:425px;height:410px;"></div>
+                                    
+                                    <div class="item" data-slide-number="6">
+                                        <img src="IMG/IMG6.jpg" style="width:425px;height:410px;"></div>
+                                    
+                                    <div class="item" data-slide-number="7">
+                                        <img src="IMG/IMG7.jpg" style="width:425px;height:410px;"></div>
+                                    
+                                    <div class="item" data-slide-number="8">
+                                       <img src="IMG/IMG8jpg" style="width:425px;height:410px;"></div>
+                                    
+                                    <div class="item" data-slide-number="9">
+                                        <img src="IMG/IMG9.jpg" style="width:425px;height:410px;"></div>
+                                    
+                                    <div class="item" data-slide-number="10">
+                                        <img src="IMG/IMG10.jpg" style="width:425px;height:410px;"></div>
+                                    
+                                    <div class="item" data-slide-number="11">
+                                        <img src="IMG/IMG11.jpg" style="width:425px;height:410px;"></div>
+                                    
+                                    <div class="item" data-slide-number="12">
+                                       <img src="IMG/IMG12.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="13">
+                                        <img src="IMG/IMG13.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="14">
+                                        <img src="IMG/IMG14.jpg" style="width:425px;height:410px;"></div>
+
+                                    <div class="item" data-slide-number="15">
+                                        <img src="IMG/IMG15.jpg" style="width:425px;height:410px;"></div>
+                                </div>
+                                <!-- Carousel nav -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/Slider-->
+        </div>
+
+    </div>
+</div>
+	</div>
+	<div class="container-fluid vidArea" id="vid">
+		<video width="400" controls>
+		  <source src="vid.mp4">
+		  Your browser does not support HTML5 video.
+		</video>
+	</div>
+	<div class="container-fluid audArea" id="aud">
+	<div class="row row-centered">
+		<div class="col-md-4 col-centered">
+			 <audio id="dalla" controls>
+			  <source src="audio.webm">
+			Your browser does not support the audio element.
+			</audio> 
+		</div>
+		<div class="col-md-4 col-centered">
+			 <audio id="second" controls>
+			  <source src="audio.webm">
+			Your browser does not support the audio element.
+			</audio> 
+		</div>
+		<div class="col col-md-4 col-centered">
+			 <audio id="third" controls>
+			  <source src="audio.webm">
+			Your browser does not support the audio element.
+			</audio> 
+		</div>
+	</div>
+	</div>
+</body>
+</html>
